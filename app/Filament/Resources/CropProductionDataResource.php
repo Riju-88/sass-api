@@ -19,6 +19,8 @@ class CropProductionDataResource extends Resource
 
     protected static ?string $navigationGroup = 'APIs';
 
+    protected static ?string $navigationLabel = 'Crop Production Data';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

@@ -61,6 +61,17 @@ class ApiMetaResource extends Resource
         return $table
             ->columns([
                 //
+                Tables\Columns\TextColumn::make('id')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('description')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('price')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('related_table')
+                    ->label('Related Table')
+                    ->searchable(),
             ])
             ->filters([
                 //

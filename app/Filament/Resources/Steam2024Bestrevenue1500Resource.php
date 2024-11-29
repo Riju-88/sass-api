@@ -19,6 +19,8 @@ class Steam2024Bestrevenue1500Resource extends Resource
 
     protected static ?string $navigationGroup = 'APIs';
 
+    protected static ?string $navigationLabel = 'Steam 2024 Best Revenue 1500';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

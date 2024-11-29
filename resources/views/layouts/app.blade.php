@@ -11,7 +11,13 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+        <style>
+            [x-cloak] {
+                display: none !important;
+            }
+        </style>
+ 
+        @filamentStyles
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -32,6 +38,7 @@
             <!-- Page Content -->
             <main>
                 {{ $slot }}
+                @filamentScripts
             </main>
         </div>
     </body>
