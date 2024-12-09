@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-1">
-                    <a href="#" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Home</a>
+                    <a href="route('home')" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Home</a>
                     <a href="#" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">About</a>
                     <a href="#" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Contact</a>
                 </div>
@@ -34,7 +34,7 @@
         </div>
         <div class="hidden mobile-menu">
             <ul class="">
-                <li class="active"><a href="index.html" class="block text-sm px-2 py-4 text-white bg-green-500 font-semibold">Home</a></li>
+                <li class="active"><a href="{{ route('home') }}" class="block text-sm px-2 py-4 text-white bg-green-500 font-semibold">Home</a></li>
                 <li><a href="#about" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">About</a></li>
                 <li><a href="#contact" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Contact</a></li>
             </ul>

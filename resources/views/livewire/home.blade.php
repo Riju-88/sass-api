@@ -4,4 +4,17 @@
 
     {{-- login --}}
     <a href='/login' target="_blank"><x-mary-button class="btn-primary">Login</x-mary-button></a>
+    {{-- plans route --}}
+    <a href='{{ route('plans') }}' target="_blank"><x-mary-button class="btn-primary">Plans</x-mary-button></a>
+
+    {{-- hr --}}
+    <hr class="my-4">
+    {{-- spacer --}}
+    <div class="my-4"></div>
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 </div>
