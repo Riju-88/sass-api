@@ -3,7 +3,14 @@
 use App\Http\Controllers\AnnualTemperatureController;
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\CropProductionController;
+use App\Http\Controllers\DocumentaryController;
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\ScienceController;
+use App\Http\Controllers\SpaceController;
+use App\Http\Controllers\SportsController;
+use App\Http\Controllers\SteamBestRevController;
+use App\Http\Controllers\TopRatedMoviesController;
+use App\Http\Controllers\TravelController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -88,4 +95,60 @@ Route::middleware(['auth:sanctum', GetFeatureCheck::class])->group(function () {
     Route::post('science', [ScienceController::class, 'store']);
     Route::put('science/{science}', [ScienceController::class, 'update']);
     Route::delete('science/{science}', [ScienceController::class, 'destroy']);
+});
+
+// middleware group for Space controller
+Route::middleware(['auth:sanctum', GetFeatureCheck::class])->group(function () {
+    Route::get('space/{perPage?}', [SpaceController::class, 'index']);
+    Route::post('space', [SpaceController::class, 'store']);
+    Route::put('space/{space}', [SpaceController::class, 'update']);
+    Route::delete('space/{space}', [SpaceController::class, 'destroy']);
+});
+
+// middleware group for Sports controller
+Route::middleware(['auth:sanctum', GetFeatureCheck::class])->group(function () {
+    Route::get('sports/{perPage?}', [SportsController::class, 'index']);
+    Route::post('sports', [SportsController::class, 'store']);
+    Route::put('sports/{sports}', [SportsController::class, 'update']);
+    Route::delete('sports/{sports}', [SportsController::class, 'destroy']);
+});
+
+// middleware group for documentary controller
+Route::middleware(['auth:sanctum', GetFeatureCheck::class])->group(function () {
+    Route::get('documentary/{perPage?}', [DocumentaryController::class, 'index']);
+    Route::post('documentary', [DocumentaryController::class, 'store']);
+    Route::put('documentary/{documentary}', [DocumentaryController::class, 'update']);
+    Route::delete('documentary/{documentary}', [DocumentaryController::class, 'destroy']);
+});
+
+// middleware group for food controller
+Route::middleware(['auth:sanctum', GetFeatureCheck::class])->group(function () {
+    Route::get('food/{perPage?}', [FoodController::class, 'index']);
+    Route::post('food', [FoodController::class, 'store']);
+    Route::put('food/{food}', [FoodController::class, 'update']);
+    Route::delete('food/{food}', [FoodController::class, 'destroy']);
+});
+
+// middleware group for travel controller
+Route::middleware(['auth:sanctum', GetFeatureCheck::class])->group(function () {
+    Route::get('travel/{perPage?}', [TravelController::class, 'index']);
+    Route::post('travel', [TravelController::class, 'store']);
+    Route::put('travel/{travel}', [TravelController::class, 'update']);
+    Route::delete('travel/{travel}', [TravelController::class, 'destroy']);
+});
+
+// middleware group for steam best revenue controller
+Route::middleware(['auth:sanctum', GetFeatureCheck::class])->group(function () {
+    Route::get('steam/{perPage?}', [SteamBestRevController::class, 'index']);
+    Route::post('steam', [SteamBestRevController::class, 'store']);
+    Route::put('steam/{steam}', [SteamBestRevController::class, 'update']);
+    Route::delete('steam/{steam}', [SteamBestRevController::class, 'destroy']);
+});
+
+// middleware group for top rated movies controller
+Route::middleware(['auth:sanctum', GetFeatureCheck::class])->group(function () {
+    Route::get('top-rated-movies/{perPage?}', [TopRatedMoviesController::class, 'index']);
+    Route::post('top-rated-movies', [TopRatedMoviesController::class, 'store']);
+    Route::put('top-rated-movies/{topRatedMovies}', [TopRatedMoviesController::class, 'update']);
+    Route::delete('top-rated-movies/{topRatedMovies}', [TopRatedMoviesController::class, 'destroy']);
 });

@@ -31,6 +31,8 @@ class CropProductionController extends Controller
             'Production' => 'required|string|max:10',
         ]);
 
+     
+
         // Create the crop production data and associate it with the authenticated user
         $cropData = $request->user()->cropProductionData()->create($fields);
 

@@ -16,7 +16,6 @@ class Sports extends Model
         'score',
         'upvote_ratio',
         'num_comments',
-        'created_utc',
         'subreddit',
         'subscribers',
         'permalink',
@@ -30,6 +29,7 @@ class Sports extends Model
         'is_bot',
         'is_megathread',
         'body',
+        'user_id',
     ];
 
     // Define the attributes with their appropriate data types

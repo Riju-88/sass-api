@@ -81,4 +81,21 @@ class User extends Authenticatable
     {
         return $this->hasMany(Steam2024Bestrevenue1500::class);
     }
+
+    public function sports()
+    {
+        return $this->hasMany(Sports::class);
+    }
+
+    public function travel()
+    {
+        return $this->hasMany(Travel::class);
+    }
+
+    public function space()
+    {
+        return $this->hasMany(Space::class);
+    }
+
+    
 }

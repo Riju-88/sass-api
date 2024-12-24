@@ -10,31 +10,9 @@ class DocumentaryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, $perPage = 10)
+    public function index($perPage = 10)
     {
-        //
-        // Retrieve the authenticated user (provided by Sanctum)
-        $user = auth('sanctum')->user();
-
-        // Check if the user has the "api-requests" feature
-        if (!$user->hasFeature('api-requests')) {
-            return response()->json([
-                'error' => 'You must subscribe to a plan to access this resource.'
-            ], 403);
-        }
-
-        // Check and consume plan resources (assuming you track a "usage limit")
-        if (!$user->canConsume('api-requests', 1.0)) {
-            return response()->json([
-                'error' => 'Plan usage limit exceeded. Please upgrade your plan.'
-            ], 403);
-        }
-
-        // Consume the resource
-        $user->consume('api-requests', 1.0);
-
-        // Proceed with fetching the resources
-
+       
         return Documentary::paginate($perPage);
     }
 

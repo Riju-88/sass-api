@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Food;
+use App\Models\Sports;
 use Illuminate\Http\Request;
 
-class FoodController extends Controller
+class SportsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index($perPage = 10)
     {
-        
-        return Food::paginate($perPage);
+        //
+        return Sports::paginate($perPage);
     }
 
     /**
@@ -21,7 +21,8 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
-        // validation
+        //
+
         // 'title',
         // 'score',
         // 'upvote_ratio',
@@ -35,10 +36,10 @@ class FoodController extends Controller
         // 'num_crossposts',
         // 'crosspost_subreddits',
         // 'post_type',
+        // 'is_nsfw',
         // 'is_bot',
         // 'is_megathread',
         // 'body',
-        // 'user_id',
 
         $fields = $request->validate([
             'title' => 'required|string|max:255',
@@ -54,21 +55,22 @@ class FoodController extends Controller
             'num_crossposts' => 'required|integer',
             'crosspost_subreddits' => 'required|string',
             'post_type' => 'required|string',
+            'is_nsfw' => 'required|boolean',
             'is_bot' => 'required|boolean',
             'is_megathread' => 'required|boolean',
             'body' => 'required|string',
         ]);
 
-        // Create the food data and associate it with the authenticated user
-        $foodData = $request->user()->food()->create($fields);
+        // Create the sports data and associate it with the authenticated user
+        $sportData = $request->user()->sports()->create($fields);
 
-        return ['message' => 'Data created successfully', 'data' => $foodData];
+        return ['message' => 'Data added successfully', 'data' => $sportData];
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Food $food)
+    public function show(Sports $sports)
     {
         //
     }
@@ -76,7 +78,7 @@ class FoodController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Food $food)
+    public function update(Request $request, Sports $sports)
     {
         //
         $fields = $request->validate([
@@ -93,12 +95,13 @@ class FoodController extends Controller
             'num_crossposts' => 'required|integer',
             'crosspost_subreddits' => 'required|string',
             'post_type' => 'required|string',
+            'is_nsfw' => 'required|boolean',
             'is_bot' => 'required|boolean',
             'is_megathread' => 'required|boolean',
             'body' => 'required|string',
         ]);
 
-        $request->user()->food()->update($fields);
+        $request->user()->sports()->update($fields);
 
         return ['message' => 'Data updated successfully'];
     }
@@ -106,10 +109,10 @@ class FoodController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Food $food)
+    public function destroy(Sports $sports)
     {
         //
-        $food->delete();
+        $sports->delete();
 
         return ['message' => 'Data deleted successfully'];
     }

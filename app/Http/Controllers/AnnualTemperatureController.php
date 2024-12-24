@@ -27,6 +27,7 @@ class AnnualTemperatureController extends Controller
             'Temperature_anomaly' => 'required|numeric',
         ]);
 
+      
         // Create the crop production data and associate it with the authenticated user
         $tempData = $request->user()->annualTemperature()->create($fields);
 
@@ -55,5 +56,8 @@ class AnnualTemperatureController extends Controller
     public function destroy(AnnualTemperature $annualTemperature)
     {
         //
+        $annualTemperature->delete();
+
+        return ['message' => 'Data deleted successfully'];
     }
 }
