@@ -18,7 +18,6 @@ class Documentary extends Model
         'score',
         'upvote_ratio',
         'num_comments',
-        'created_utc',
         'subreddit',
         'subscribers',
         'permalink',

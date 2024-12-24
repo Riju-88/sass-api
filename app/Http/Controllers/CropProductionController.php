@@ -4,18 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\CropProductionData;
 use Illuminate\Http\Request;
-// import hasMiddleware
-use Illuminate\Routing\Controllers\HasMiddleware;
 
 class CropProductionController extends Controller
 {
-    public static function middleware()
-    {
-        return [
-            new Middleware('auth:sanctum', except: ['index', 'show']),
-        ];
-    }
-
     /**
      * Display a listing of the resource.
      */

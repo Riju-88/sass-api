@@ -2,17 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Science;
+use App\Models\Documentary;
 use Illuminate\Http\Request;
 
-class ScienceController extends Controller
+class DocumentaryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index($perPage = 10)  // Default value of 10 if not provided
+    public function index(Request $request, $perPage = 10)
     {
-        return Science::paginate($perPage);
+        //
+        // Retrieve the authenticated user (provided by Sanctum)
+        $user = auth('sanctum')->user();
+
+        // Check if the user has the "api-requests" feature
+        if (!$user->hasFeature('api-requests')) {
+            return response()->json([
+                'error' => 'You must subscribe to a plan to access this resource.'
+            ], 403);
+        }
+
+        // Check and consume plan resources (assuming you track a "usage limit")
+        if (!$user->canConsume('api-requests', 1.0)) {
+            return response()->json([
+                'error' => 'Plan usage limit exceeded. Please upgrade your plan.'
+            ], 403);
+        }
+
+        // Consume the resource
+        $user->consume('api-requests', 1.0);
+
+        // Proceed with fetching the resources
+
+        return Documentary::paginate($perPage);
     }
 
     /**
@@ -20,13 +43,30 @@ class ScienceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate these:
+        // 'title',
+        // 'score',
+        // 'upvote_ratio',
+        // 'num_comments',
+        // 'created_utc',
+        // 'subreddit',
+        // 'subscribers',
+        // 'permalink',
+        // 'url',
+        // 'domain',
+        // 'num_awards',
+        // 'num_crossposts',
+        // 'crosspost_subreddits',
+        // 'post_type',
+        // 'is_bot',
+        // 'is_megathread',
+        // 'user_id',
+
         $fields = $request->validate([
             'title' => 'required|string|max:255',
             'score' => 'required|integer',
             'upvote_ratio' => 'required|numeric',
             'num_comments' => 'required|integer',
-            'created_utc' => 'required|integer',
             'subreddit' => 'required|string|max:255',
             'subscribers' => 'required|integer',
             'permalink' => 'required|string',
@@ -39,19 +79,18 @@ class ScienceController extends Controller
             'is_nsfw' => 'required|boolean',
             'is_bot' => 'required|boolean',
             'is_megathread' => 'required|boolean',
-            'body' => 'required|string',
         ]);
 
-        // Create the crop production data and associate it with the authenticated user
-        $scienceData = $request->user()->science()->create($fields);
+        // Create the documentary data and associate it with the authenticated user
+        $documentaryData = $request->user()->documentary()->create($fields);
 
-        return ['message' => 'Data added successfully', 'data' => $scienceData];
+        return ['message' => 'Data added successfully', 'data' => $documentaryData];
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Science $science)
+    public function show(Documentary $documentary)
     {
         //
     }
@@ -59,15 +98,14 @@ class ScienceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Science $science)
+    public function update(Request $request, Documentary $documentary)
     {
         //
         $fields = $request->validate([
             'title' => 'required|string|max:255',
             'score' => 'required|integer',
-            'upvote_ratio  ' => 'required|numeric',
+            'upvote_ratio' => 'required|numeric',
             'num_comments' => 'required|integer',
-            'created_utc' => 'required|integer',
             'subreddit' => 'required|string|max:255',
             'subscribers' => 'required|integer',
             'permalink' => 'required|string',
@@ -80,10 +118,9 @@ class ScienceController extends Controller
             'is_nsfw' => 'required|boolean',
             'is_bot' => 'required|boolean',
             'is_megathread' => 'required|boolean',
-            'body' => 'required|string',
         ]);
 
-        $request->user()->science()->update($fields);
+        $request->user()->documentary()->update($fields);
 
         return ['message' => 'Data updated successfully'];
     }
@@ -91,10 +128,10 @@ class ScienceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Science $science)
+    public function destroy(Documentary $documentary)
     {
         //
-        $science->delete();
+        $documentary->delete();
 
         return ['message' => 'Data deleted successfully'];
     }

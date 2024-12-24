@@ -4,18 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\AnnualTemperature;
 use Illuminate\Http\Request;
-// import hasMiddleware
-use Illuminate\Routing\Controllers\HasMiddleware;
 
 class AnnualTemperatureController extends Controller
 {
-    public static function middleware()
-    {
-        return [
-            new Middleware('auth:sanctum', except: ['index', 'show']),
-        ];
-    }
-
     /**
      * Display a listing of the resource.
      */
