@@ -9,5 +9,5 @@ class ApiMeta extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'price', 'related_table'];
+    protected $fillable = ['name', 'description', 'related_table', 'get_endpoint', 'post_endpoint', 'post_sample', 'update_endpoint', 'delete_endpoint'];
 }

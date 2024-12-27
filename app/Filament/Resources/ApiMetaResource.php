@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ApiMetaResource\Pages;
 use App\Filament\Resources\ApiMetaResource\RelationManagers;
 use App\Models\ApiMeta;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -27,32 +28,43 @@ class ApiMetaResource extends Resource
     {
         return $form
             ->schema([
-                Textarea::make('description')->required(),
-                TextInput::make('name')->required(),
-                TextInput::make('price')->numeric()->minValue(0)->required(),
-                Select::make('related_table')
-                    ->options(function () {
-                        $modelPath = app_path('Models');
-                        $options = [];
+                Section::make()
+                    ->schema([
+                        // ...
+                        TextInput::make('name')->required(),
+                        Textarea::make('description')->required(),
+                        Select::make('related_table')
+                            ->options(function () {
+                                $modelPath = app_path('Models');
+                                $options = [];
 
-                        foreach (glob($modelPath . '/*.php') as $file) {
-                            $modelName = pathinfo($file, PATHINFO_FILENAME);
-                            $fullClassName = 'App\\Models\\' . $modelName;
+                                foreach (glob($modelPath . '/*.php') as $file) {
+                                    $modelName = pathinfo($file, PATHINFO_FILENAME);
+                                    $fullClassName = 'App\\Models\\' . $modelName;
 
-                            if (class_exists($fullClassName) && is_subclass_of($fullClassName, 'Illuminate\Database\Eloquent\Model')) {
-                                $modelInstance = new $fullClassName();  // Create an instance of the model
-                                $tableName = $modelInstance->getTable();  // Get the table name
+                                    if (class_exists($fullClassName) && is_subclass_of($fullClassName, 'Illuminate\Database\Eloquent\Model')) {
+                                        $modelInstance = new $fullClassName();  // Create an instance of the model
+                                        $tableName = $modelInstance->getTable();  // Get the table name
 
-                                // Format the table name to capitalized words with spaces
-                                $formattedName = ucfirst(str_replace('_', ' ', $tableName));
+                                        // Format the table name to capitalized words with spaces
+                                        $formattedName = ucfirst(str_replace('_', ' ', $tableName));
 
-                                $options[$tableName] = $formattedName;  // Display formatted name but keep original value
-                            }
-                        }
+                                        $options[$tableName] = $formattedName;  // Display formatted name but keep original value
+                                    }
+                                }
 
-                        return $options;
-                    })
-                    ->required(),
+                                return $options;
+                            })
+                            ->required(),
+                    ]),
+                Section::make()
+                    ->schema([
+                        TextInput::make('get_endpoint')->required(),
+                        TextInput::make('post_endpoint'),
+                        TextArea::make('post_sample'),
+                        TextInput::make('update_endpoint'),
+                        TextInput::make('delete_endpoint'),
+                    ])
             ]);
     }
 
@@ -67,10 +79,10 @@ class ApiMetaResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('price')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('related_table')
                     ->label('Related Table')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('get_endpoint')
                     ->searchable(),
             ])
             ->filters([
