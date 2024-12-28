@@ -7,6 +7,7 @@ use App\Filament\Resources\PlanResource\RelationManagers;
 use Filament\Forms\Components\MultiSelect;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextArea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -67,6 +68,15 @@ class PlanResource extends Resource
                     ->minItems(1)
                     ->columns(2)
                     ->helperText('Add features with their respective charges.'),
+                TextArea::make('description')
+                    ->required()
+                    ->label('Plan Description')
+                    ->default(''),
+                TextInput::make('price')
+                    ->numeric()
+                    ->required()
+                    ->label('Price')
+                    ->default(null),
             ]);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\PlanResource\Pages;
 
 use App\Filament\Resources\PlanResource;
+use App\Models\Plandetail;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Actions;
 use LucasDotVin\Soulbscription\Models\Feature;
@@ -34,17 +35,29 @@ class EditPlan extends EditRecord
             ];
         })->toArray();
 
+        // Fetch the plandetail and populate its fields
+        $plandetail = Plandetail::where('plan_id', $plan->id)->first();
+        if ($plandetail) {
+            $data['description'] = $plandetail->description;
+            $data['price'] = $plandetail->price;
+        }
+
         return $data;
     }
 
     /**
      * Process and save the updated form data.
-     * Attach features with charges to the pivot table.
+     * Attach features with charges to the pivot table and update plandetail.
      */
     protected function mutateFormDataBeforeSave(array $data): array
     {
         $this->syncFeaturesWithCharges($data);
+
+        // Update the plandetail record
+        $this->updatePlanDetail($data);
+
         unset($data['features_with_charges']);  // Remove Repeater data after processing
+        unset($data['description'], $data['price']);  // Remove plandetail data after processing
 
         return $data;
     }
@@ -68,5 +81,21 @@ class EditPlan extends EditRecord
 
         // Sync features with charges
         $plan->features()->sync($syncData);
+    }
+
+    /**
+     * Update the plandetail record.
+     */
+    private function updatePlanDetail(array $data): void
+    {
+        $plan = $this->getRecord();
+
+        // Find or create the plandetail for the current plan
+        $plandetail = Plandetail::firstOrNew(['plan_id' => $plan->id]);
+
+        // Update the plandetail fields
+        $plandetail->description = $data['description'] ?? $plandetail->description;
+        $plandetail->price = $data['price'] ?? $plandetail->price;
+        $plandetail->save();
     }
 }

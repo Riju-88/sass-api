@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\PlanResource\Pages;
 
 use App\Filament\Resources\PlanResource;
+use App\Models\Plandetail;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Actions;
 use Illuminate\Database\Eloquent\Model;
@@ -28,6 +29,12 @@ class CreatePlan extends CreateRecord
         // Sync features with charges
         $this->syncFeaturesWithCharges($plan, $data['features_with_charges'] ?? []);
 
+        // Create the Plandetail Entry
+        Plandetail::create([
+            'plan_id' => $plan->id,
+            'description' => $data['description'],
+            'price' => $data['price'],
+        ]);
         return $plan;  // Return the created Plan instance
     }
 

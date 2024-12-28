@@ -17,16 +17,17 @@ class Plans extends Component
     public function mount()
     {
         // Get the currently authenticated user
-        $user = Auth::user();
+        $user = auth('sanctum')->user();
 
         // Fetch all plans with their corresponding details
         $this->plansWithDetails = Plan::all()->map(function ($plan) {
             $detail = PlanDetail::where('plan_id', $plan->id)->first();
+            // dd($detail);
             return (object) [
                 'id' => $plan->id,
                 'name' => $plan->name,
                 'description' => $detail->description ?? 'No description available.',
-                'price' => $detail->price,
+                'price' => $detail->price ?? 'Price not available',
             ];
         });
     }
@@ -90,7 +91,6 @@ class Plans extends Component
                 // Handle any additional logic required for downgrading, if any
                 $user->subscribeTo($plan);
                 session()->flash('success', 'You have successfully switched to the free plan.');
-                
             }
         } else {
             // Case when the user doesn't have an active subscription

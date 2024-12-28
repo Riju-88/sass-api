@@ -15,10 +15,11 @@ $logout = function (Logout $logout) {
             <div class="flex justify-between">
                 <div class="flex space-x-7">
                     <div>
-                        <a href="#" class="flex items-center py-4 px-2">
-                            <img src="https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=50&q=80" alt="Logo" class="h-8 w-8 mr-2">
-                            <span class="font-semibold text-gray-500 text-lg">Navbar</span>
-                        </a>
+                        <a href="{{ route('home') }}" class="flex items-center py-4 px-2">
+                           
+                        
+                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    </a>
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-1">
@@ -58,6 +59,21 @@ $logout = function (Logout $logout) {
                         </button>
                     </x-slot>
                 </x-dropdown>
+
+                 <!-- Add this button right here -->
+    <button id="theme-toggle" type="button"
+    class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+    </svg>
+    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+            fill-rule="evenodd" clip-rule="evenodd"></path>
+    </svg>
+</button>
             </div>
             @endauth
                 <div class="md:hidden flex items-center">
