@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RazorpayPaymentController;
+use App\Livewire\ApiList;
 use App\Livewire\Home;
 use App\Livewire\PaymentGateway;
 use App\Livewire\Plans;
@@ -20,5 +21,6 @@ Route::get('payment', PaymentGateway::class)->middleware('auth:sanctum')->name('
 Route::post('payment', [RazorpayPaymentController::class, 'store'])->middleware('auth:sanctum')->name('payment-gateway.store');
 
 Route::get('plans', Plans::class)->name('plans')->middleware('auth');
+Route::get('apilist', ApiList::class)->name('apilist')->middleware('auth');
 
 require __DIR__ . '/auth.php';
