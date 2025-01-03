@@ -10,7 +10,8 @@ use function Livewire\Volt\state;
 
 state([
     'name' => fn () => auth()->user()->name,
-    'email' => fn () => auth()->user()->email
+    'email' => fn () => auth()->user()->email,
+    'token' => null,
 ]);
 
 $updateProfileInformation = function () {
@@ -31,7 +32,15 @@ $updateProfileInformation = function () {
 
     $this->dispatch('profile-updated', name: $user->name);
 };
+$generateToken = function () {
+    $user = Auth::user();
 
+    // Revoke existing tokens (optional, but good practice)
+    $user->tokens()->delete();
+
+    // Generate a new token
+    $this->token = $user->createToken('profile_token')->plainTextToken;
+};
 $sendVerification = function () {
     $user = Auth::user();
 
@@ -98,4 +107,16 @@ $sendVerification = function () {
             </x-action-message>
         </div>
     </form>
+    <div>
+        {{-- generate token button --}}
+        <div class="mt-4"></div>
+        <x-primary-button wire:click="generateToken">Generate API Token</x-primary-button>
+        <div class="mt-4 p-4 bg-gray-100 rounded-md">
+                @if ($token)
+                <p><strong>Your API Token:</strong></p>
+                <code class="break-words">{{ $token }}</code>
+                <p class="text-sm text-gray-500"><strong>Important:</strong> This token will only be shown once. Please copy it now.</p>
+                @endif
+        </div>
+ </div>
 </section>

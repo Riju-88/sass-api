@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 use LucasDotVin\Soulbscription\Models\Plan;
+use LucasDotVin\Soulbscription\Models\Subscription;
 use Razorpay\Api\Api;
 use Exception;
 
@@ -45,7 +46,7 @@ class RazorpayPaymentController extends Controller
             abort(403, 'Selected plan not found.');
         }
         $plan = Plan::find($selectedPlan['id']);
-        $user = Auth::user();
+        $user = auth('sanctum')->user();
         $input = $request->all();
         // Verify CSRF token
         if (!Session::token() == $input['_token']) {
@@ -72,11 +73,36 @@ class RazorpayPaymentController extends Controller
                     // DB::transaction(function () {
 
                     // });
-                    // $student->switchTo($newPlan);
+
+                    // check active subscription
+                    $activeSubscription = Subscription::where('subscriber_type', get_class($user))
+                        ->where('subscriber_id', $user->id)
+                        ->whereNull('canceled_at')  // Ensure the subscription is not canceled
+                        ->where(function ($query) {
+                            $query
+                                ->whereNull('expired_at')  // Either not expired
+                                ->orWhere('expired_at', '>', now());  // Or not expired yet
+                        })
+                        ->first();
+
+                    if (!$activeSubscription) {
+                        // subscribe to plan
+                        $user->subscribeTo($plan);
+
+                        // clear session
+                        session()->forget('selected_plan');
+                        $planMsg = 'Successfully subscribed to ' . $plan->name;
+
+                        return redirect()->route('home')->with('success', $paymentMsg . ' and ' . $planMsg);
+                    }
                     $user->switchTo($plan);
                     // clear session
                     session()->forget('selected_plan');
                     $planMsg = 'Successfully subscribed to ' . $plan->name;
+
+                    // Session::put('success', ('Payment Successful'));
+                    // return redirect(route('home'));
+                    return redirect()->route('home')->with('success', $paymentMsg . ' and ' . $planMsg);
                 }
             } catch (Exception $e) {
                 \Log::error('Razorpay API Error: ' . $e->getMessage());
@@ -87,8 +113,5 @@ class RazorpayPaymentController extends Controller
                     ->with('error', 'An error occurred while processing the payment. Please try again later.');
             }
         }
-        // Session::put('success', ('Payment Successful'));
-        // return redirect(route('home'));
-        return redirect()->route('home')->with('success', $paymentMsg . ' and ' . $planMsg);
     }
 }

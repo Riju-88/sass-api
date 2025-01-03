@@ -11,7 +11,6 @@ use App\Http\Controllers\SportsController;
 use App\Http\Controllers\SteamBestRevController;
 use App\Http\Controllers\TopRatedMoviesController;
 use App\Http\Controllers\TravelController;
-use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,10 +43,10 @@ Route::post('/tokens/create', function (Request $request) {
 // });
 
 // Rate limiters defined within the boot method of application's App\Providers\AppServiceProvider class
-Route::middleware(['throttle:api'])->group(function () {
-    Route::apiResource('users', UserController::class)
-        ->middleware('auth:sanctum');
-});
+// Route::middleware(['throttle:api'])->group(function () {
+//     Route::apiResource('users', ApiAuthController::class)
+//         ->middleware('auth:sanctum');
+// });
 
 Route::controller(ApiAuthController::class)->group(function () {
     Route::post('login', 'login');

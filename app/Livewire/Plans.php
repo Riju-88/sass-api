@@ -36,7 +36,7 @@ class Plans extends Component
     {
         // dd($planId);
         // Get the currently authenticated user
-        $user = Auth::user();
+        $user = auth('sanctum')->user();
 
         // Find the selected plan
         $plan = Plan::find($planId);

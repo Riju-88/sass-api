@@ -59,6 +59,31 @@ class ApiAuthController extends Controller
         return response($response, 201);
     }
 
+      /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        // Validate incoming request
+        $fields = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'required',
+        ]);
+
+        // Find the user or fail
+        $user = User::findOrFail($id);
+
+        // Update user details
+        $user->name = $fields['name'];
+        $user->email = $fields['email'];
+        $user->password = bcrypt($fields['password']);
+        $user->save();
+
+        // Return updated user
+        return $user;
+    }
+    
     public function logout(user $user)
     {
         //
