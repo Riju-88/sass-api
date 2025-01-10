@@ -32,6 +32,9 @@ $logout = function (Logout $logout) {
                         <a href="#" class="btn btn-ghost btn-sm">Contact</a>
                         <a href="/admin" class="btn btn-ghost btn-sm" target="_blank">Admin</a>
                     </div>
+                    <div class="flex items-center gap-4"> 
+                        <livewire:Search />
+                    </div>
                     <div class="flex items-center gap-4">
                        
                            {{-- settings dropdown --}}
@@ -114,7 +117,9 @@ $logout = function (Logout $logout) {
                         class="btn btn-ghost btn-circle"
                         aria-label="Toggle menu"
                     >
-                        <i class="fas" :class="isOpen ? 'fa-times' : 'fa-bars'"></i>
+                    {{-- <i :class=" 'fas fa-bars'"></i> --}}
+                    <span>🟰</span>
+
                     </button>
                 </div>
             </div>
