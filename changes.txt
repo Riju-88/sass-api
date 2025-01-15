@@ -1,0 +1,14 @@
+next attempt:
+
+create user dashboard filament for 3rd party api publishers.
+
+create bank details table to store their banking info.
+
+create scheduler for publisher payment at the beginning of month.
+
+create proxy middleware for 3rd party apis to track usage.
+
+create cron job service for the scheduler.
+
+changes:
+

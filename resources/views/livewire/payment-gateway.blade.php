@@ -4,6 +4,17 @@
             {{ __('Payment Gateway') }}
         </h2>
     </x-slot>
+    @if (session()->has('error'))
+    <div class="alert alert-danger bg-red-200 dark:bg-red-900 p-4 rounded mb-4 text-red-700 dark:text-red-200">
+        {{ session('error') }}
+    </div>
+@endif
+
+    @if (session()->has('success'))
+    <div class="alert alert-success bg-green-200 dark:bg-green-900 p-4 rounded mb-4 text-green-700 dark:text-green-200">
+        {{ session('success') }}
+    </div>
+@endif
 
     <div class="container mx-auto p-6 min-h-screen flex items-center justify-center">
         <div class="bg-white shadow-lg rounded-xl p-8 max-w-2xl w-full">

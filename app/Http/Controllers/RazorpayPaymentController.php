@@ -98,7 +98,7 @@ class RazorpayPaymentController extends Controller
                     $user->switchTo($plan);
                     // clear session
                     session()->forget('selected_plan');
-                    $planMsg = 'Successfully subscribed to ' . $plan->name;
+                    $planMsg = 'Successfully switched to ' . $plan->name;
 
                     // Session::put('success', ('Payment Successful'));
                     // return redirect(route('home'));
