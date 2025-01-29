@@ -97,5 +97,10 @@ class User extends Authenticatable
         return $this->hasMany(Space::class);
     }
 
+    public function apiProvider()
+{
+    return $this->hasOne(ApiProvider::class, 'user_id');
+}
+
     
 }

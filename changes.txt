@@ -1,6 +1,6 @@
 next attempt:
 
-create user dashboard filament for 3rd party api publishers.
+create user dashboard filament for 3rd party api publishers. (done)
 
 create bank details table to store their banking info.
 
@@ -9,6 +9,13 @@ create scheduler for publisher payment at the beginning of month.
 create proxy middleware for 3rd party apis to track usage.
 
 create cron job service for the scheduler.
+
+challenges:
+making pricing model for 3rd party api publishers and creating unified pricing packages for both 1st and 3rd party apis.
+
+providing api keys of third party apis from this application...
+
+plan: create 1 package to include the native apis and indivisual packages for 3rd party apis as described by their providers.
 
 changes:
 
