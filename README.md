@@ -1,6 +1,6 @@
 # API Marketplace(SaaS)
 
-A modern API Marketplace built using the TALL stack (Tailwind CSS, Alpine.js, Laravel, and Livewire). This platform allows developers to discover, purchase, and integrate APIs seamlessly.
+A modern API Marketplace built using the TALL stack (Tailwind CSS, Alpine.js, Laravel, and Livewire). This platform allows developers to discover, subscribe, and integrate APIs seamlessly.
 
 ## Tech Stack
 
