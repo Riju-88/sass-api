@@ -41,7 +41,7 @@
                         <h2 class="card-title">{{$api->name}}</h2>
                         <div class="badge badge-primary">New</div>
                     </div>
-                    <p>A peaceful escape into nature's embrace</p>
+                    <p>{{ $api->description }}</p>
                     <div class="flex items-center gap-2 mt-2">
                         <div class="rating rating-sm">
                             <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" checked />
