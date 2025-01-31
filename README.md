@@ -92,11 +92,34 @@ Register as a provider, list your APIs, and manage subscriptions.
 
 ## Screenshots
 
+### App Homepage
+
 ![App Homepage](screenshots/home%20page.png)
+
+### API Login Demo
+
 ![API Login demo](screenshots/api%20login.png)
+
+### API List
+
 ![API List](screenshots/api%20list.png)
+
+### API Plan List
+
 ![API Plan List](screenshots/saas%20plans.png)
+
+### Plans Dashboard Admin
+
 ![Plans dashboard admin](screenshots/admin%20plans.png)
+
+### Admin API Manage
+
 ![Admin api manage](screenshots/admin%20api%20demo.png)
+
+### API Details Page
+
 ![API details page](screenshots/api%20playground%20demo.png)
+
+### API Travel Demo
+
 ![API travel demo](screenshots/api%20travel.png)
