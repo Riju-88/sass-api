@@ -6,6 +6,13 @@ A modern API Marketplace built using the TALL stack (Tailwind CSS, Alpine.js, La
 
 URL: https://apinexus.free.nf
 
+### Demo Video
+
+<video width="600" controls>
+  <source src="videos/sass_api_demo.mkv" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 ## Tech Stack
 
 This project was built using the **TALL stack** (Tailwind CSS, Alpine.js, Laravel, and Livewire)
