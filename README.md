@@ -8,10 +8,9 @@ URL: https://apinexus.free.nf
 
 ### Demo Video
 
-<video width="600" controls>
-  <source src="videos/sass_api_demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+
+https://github.com/user-attachments/assets/23ae6a1a-9dfa-4151-a411-a695d435e6e4
+
 
 ## Tech Stack
 
