@@ -53,7 +53,8 @@
                         <span class="text-sm opacity-70">(4.0)</span>
                     </div>
                     <div class="card-actions justify-end mt-4">
-                        <button class="btn btn-primary btn-sm">View Details</button>
+                    <a href="{{ route('apiplayground', ['api' => $api->name]) }}"  class="btn btn-primary btn-sm">View Details</a>
+                        
                     </div>
                 </div>
             </div>
